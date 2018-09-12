@@ -16,11 +16,9 @@ public class Main {
         File file = new File(path);
         jflex.Main.generate(file);
 
-        System.out.println("Ingrese la dirección del archivo: ");
-        Scanner scanner = new Scanner(System.in);
-        String filePath = scanner.nextLine();
-
-        /*
+        //System.out.println("Ingrese la dirección del archivo: ");
+        //Scanner scanner = new Scanner(System.in);
+        String filePath = "/Users/alina/test.txt";
 
         try {
             Reader reader = new BufferedReader(new FileReader(filePath));
@@ -36,20 +34,14 @@ public class Main {
                     tokens.add(token);
                 }
             }
-            //ControladorToken.separaTokensBuenosMalos(tokensBuenos,tokensMalos);
-            //ControladorToken.ordenarPorToken(tokensBuenos);
 
-            System.out.println("\nTokens válidos ordenados \n");
+            System.out.println("\nTokens \n");
             for (Token token : tokens) {
                 System.out.println(token.toString());
             }
 
-            //System.out.println("\n\nErrores de tokens \n");
-            //for (Token token : errorTokens) {
-                //System.out.println(token.toString());
-            //}
         } catch (FileNotFoundException ex) {
-            System.out.println("Error de archivo");
+            System.out.println("Error");
         } /**/
     }
 }
