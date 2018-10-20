@@ -38,24 +38,40 @@ InvalidIdentifier = "_"{Identifier}*{InvalidCharacter}*({Identifier}|{InvalidCha
 Operator = "+"|"-"|"*"|"/"|"%"|":="|"<"|"<="|">"|">="|"="|"<>"
 Separator = "."|","|";"|"("|")"|"["|"]"
 
-ReservedWord = "const"|"var"|"begin"|"end"|"if"|"then"|"else"|"while"|"do"|"for"|"to"|"and"|"or"|"not"|"read"|"write"|
-                "readchar"|"writechar"|"EOF"
 
-DataType  = "int"|"float"|"chr"|"str"
+
+Const = "const"
+Var = "var"
+Begin = "begin"
+End = "End"
+If = "if"
+Then = "then"
+Else = "else"
+While = "while"
+Do = "do"
+For = "for"
+To= "to"
+And = "and"
+Or = "or"
+Not = "not"
+Read = "read"
+Write = "write"
+Readchar = "readchar"
+Writechar = "writechar"
+Eof = "EOF"
 
 Integers = {NumDecimal}|{NumHex}
 NumDecimal = [1-9][0-9]*|"0"
 NumHex = 0[xX]([0-9]|[a-fA-F])+
 
-Numbers = {Integers}
+Numbers = {Integers}|"-"{Integers}
 
 LiteralStr = \"[^\n\r\"]*\"
-LitetralStrInvalida = \"+{LiteralStr} | {LiteralStr}\"+
+LiteralStrInvalid = \"+{LiteralStr} | {LiteralStr}\"+
 LiteralChr = \'[^\']\'
-LiteralChrInvalido = \'[^\']+\' | \'+\'[^\']+\' | \'[^\']+\'\'+
 
 Literal  = ({LiteralStr}|{LiteralChr})
-LiteralInvlaido = {LitetralStrInvalida} | {LiteralChrInvalido}|
+LiteralInvalid = {LiteralStrInvalid} |
                     {Integers}({Alphabet} | {InvalidCharacter} | "_"| (({Alphabet}|{InvalidCharacter}|"_"){Integers}))+
 %%
 
@@ -66,9 +82,26 @@ LiteralInvlaido = {LitetralStrInvalida} | {LiteralChrInvalido}|
     {Literal}           {Token t = new Token(yytext(),"String",yyline,yycolumn);tokens.add(t);return t;}
     {Numbers}           {Token t = new Token(yytext(),"Number",yyline,yycolumn);tokens.add(t);return t;}
 
-    {LiteralInvlaido}   {Token t = new Token(yytext(),"ERROR, invalid literal",yyline,yycolumn);tokens.add(t);return t;}
-
-    {ReservedWord}      {Token t = new Token(yytext(),"Reserved Word",yyline,yycolumn);tokens.add(t);return t;}
+    {LiteralInvalid}    {Token t = new Token(yytext(),"ERROR, invalid literal",yyline,yycolumn);tokens.add(t);return t;}
+    {Const}             {Token t = new Token(yytext(),"Const: Reserved word",yyline,yycolumn);tokens.add(t);return t;}
+    {Var}               {Token t = new Token(yytext(),"Var: Reserved word",yyline,yycolumn);tokens.add(t);return t;}
+    {Begin}                  {Token t = new Token(yytext(),"Begin: Reserved word",yyline,yycolumn);tokens.add(t);return t;}
+    {End}                  {Token t = new Token(yytext(),"End: Reserved word",yyline,yycolumn);tokens.add(t);return t;}
+    {If}                  {Token t = new Token(yytext(),"If: Reserved word",yyline,yycolumn);tokens.add(t);return t;}
+    {Then}                  {Token t = new Token(yytext(),"Then: Reserved word",yyline,yycolumn);tokens.add(t);return t;}
+    {Else}                  {Token t = new Token(yytext(),"Else: Reserved word",yyline,yycolumn);tokens.add(t);return t;}
+    {While}                  {Token t = new Token(yytext(),"While: Reserved word",yyline,yycolumn);tokens.add(t);return t;}
+    {Do}                  {Token t = new Token(yytext(),"Do: Reserved word",yyline,yycolumn);tokens.add(t);return t;}
+    {For}                  {Token t = new Token(yytext(),"For: Reserved word",yyline,yycolumn);tokens.add(t);return t;}
+    {To}                  {Token t = new Token(yytext(),"To: Reserved word",yyline,yycolumn);tokens.add(t);return t;}
+    {And}                  {Token t = new Token(yytext(),"And: Reserved word",yyline,yycolumn);tokens.add(t);return t;}
+    {Or}                  {Token t = new Token(yytext(),"Or: Reserved word",yyline,yycolumn);tokens.add(t);return t;}
+    {Not}                  {Token t = new Token(yytext(),"Not: Reserved word",yyline,yycolumn);tokens.add(t);return t;}
+    {Read}                  {Token t = new Token(yytext(),"Read: Reserved word",yyline,yycolumn);tokens.add(t);return t;}
+    {Write}                  {Token t = new Token(yytext(),"Write: Reserved word",yyline,yycolumn);tokens.add(t);return t;}
+    {Readchar}                  {Token t = new Token(yytext(),"Readchar: Reserved word",yyline,yycolumn);tokens.add(t);return t;}
+    {Writechar}                  {Token t = new Token(yytext(),"Writechar: Reserved word",yyline,yycolumn);tokens.add(t);return t;}
+    {Eof}                  {Token t = new Token(yytext(),"EOF",yyline,yycolumn);tokens.add(t);return t;}
 
     {Operator}          {Token t = new Token(yytext(),"Operator",yyline,yycolumn);tokens.add(t);return t;}
 

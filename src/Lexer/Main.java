@@ -12,13 +12,13 @@ public class Main {
         ArrayList<Token> tokens = new ArrayList<>();
         ArrayList<Token> errorTokens = new ArrayList<>();
 
-        String path = "src/Lexer/Lexer.flex";
-        File file = new File(path);
-        jflex.Main.generate(file);
+        //String path = "src/Lexer/Lexer.flex";
+        //File file = new File(path);
+        //jflex.Main.generate(file);
 
-        //System.out.println("Ingrese la dirección del archivo: ");
-        //Scanner scanner = new Scanner(System.in);
-        String filePath = "/Users/alina/test.txt";
+        System.out.println("File path: ");
+        Scanner scanner = new Scanner(System.in);
+        String filePath = scanner.nextLine();
 
         try {
             Reader reader = new BufferedReader(new FileReader(filePath));
@@ -30,7 +30,6 @@ public class Main {
                     break;
                 }
                 else{
-                    //System.out.println(token.toString());
                     tokens.add(token);
                 }
             }

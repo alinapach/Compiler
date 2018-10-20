@@ -18,6 +18,6 @@ public class Token {
 
     @Override
     public String toString() {
-        return "Token --> " + token + "\t Type: " + type + " [Row: "+ row +" Column: " + column + "]";
+        return "Token --> " + token + "\t\t" + type + " [Row: "+ row +" Column: " + column + "]";
     }
 }
