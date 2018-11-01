@@ -43,7 +43,7 @@ Separator = "."|","|";"|"("|")"|"["|"]"
 Const = "const"
 Var = "var"
 Begin = "begin"
-End = "End"
+End = "end"
 If = "if"
 Then = "then"
 Else = "else"
@@ -64,7 +64,7 @@ Integers = {NumDecimal}|{NumHex}
 NumDecimal = [1-9][0-9]*|"0"
 NumHex = 0[xX]([0-9]|[a-fA-F])+
 
-Numbers = {Integers}|"-"{Integers}
+Numbers ={Integers}
 
 LiteralStr = \"[^\n\r\"]*\"
 LiteralStrInvalid = \"+{LiteralStr} | {LiteralStr}\"+

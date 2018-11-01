@@ -1,0 +1,83 @@
+/* Grammar */
+
+Program     ::= P1 P2 Compound END_PERIOD;
+
+P1          ::= CONST IDENTIFIER EQUAL INTEGER P1prime SEMICOLON
+                | ;
+
+P1prime     ::= COMMA IDENTIFIER EQUAL INTEGER P1prime
+                | ;
+
+P2          ::= VAR IDENTIFIER ArrayC P2prime SEMICOLON
+                | ;
+
+ArrayC      ::= L_SQ_P CONST R_SQ_P
+                | ;
+
+P2prime     ::= COMMA IDENTIFIER ArrayC P2prime
+                | ;
+
+Compound    ::= BEGIN Statement StatementPrime END;
+
+StatementPrime ::= SEMICOLON Statement StatementPrime
+                   | ;
+
+Statement   ::= LValue COLON_EQUAL Expression
+                | Compound
+                | IF BoolExpression THEN Statement ElseStatement
+                | WHILE BoolExpression DO Statement
+                | FOR IDENTIFIER COLON_EQUAL Expression TO Expression DO Statement
+                | IOStatement;
+
+ElseStatement ::= ELSE Statement
+                  | ;
+
+IOStatement ::= READCHAR LValue
+                | WRITECHAR Value
+                | READ LValue COMMA LValue
+                | WRITE Value;
+
+LValue      ::= IDENTIFIER ArrayE;
+
+ArrayE      ::= L_SQ_P Expression R_SQ_P | ;
+
+Value       ::= IDENTIFIER ArrayE | INTEGER;
+
+BoolExpression  ::= BoolTerminator Or;
+
+Or          ::= OR BoolTerminator Or | ;
+
+BoolTerminator  ::= BoolFactor And;
+
+And         ::= BoolFactor AND And | ;
+
+BoolFactor  ::= Condition | L_RND_P BoolExpression R_RND_P | NOT BoolFactor;
+
+Condition   ::= Value Symbol Value | ODD Value;
+
+Symbol      ::= EQUAL
+                | NOT_EQUAL
+                | LESS_EQUAL
+                | LESS_THAN
+                | MORE_THAN
+                | MORE_EQUAL;
+
+Expression  ::= Terminator MoreTerminator;
+
+MoreTerminator  ::= PLUS Terminator MoreTerminator
+                    | MINUS Terminator MoreTerminator
+                    | ;
+
+Terminator  ::= Factor MoreFactor;
+
+MoreFactor  ::= MUL Factor MoreFactor
+                | DIV Factor MoreFactor
+                | PERCENTAGE Factor MoreFactor
+                | ;
+
+Factor      ::= IDENTIFIER ArrayE
+                | INTEGER
+                | MINUS Factor
+                | L_RND_P Expression R_RND_P;
+
+

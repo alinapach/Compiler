@@ -2,11 +2,10 @@ package Utilities;
 
 public class Token {
 
-
     private String token;
     private String type;
-    private int row;
-    private int column;
+    public int row;
+    public int column;
 
     public Token(String token, String type, int row, int column){
 
@@ -18,6 +17,21 @@ public class Token {
 
     @Override
     public String toString() {
-        return "Token --> " + token + "\t\t" + type + " [Row: "+ row +" Column: " + column + "]";
+        return " Token --> " + token + "\t\t" + type + " [Row: "+ row +" Column: " + column + "]";
+    }
+
+
+    public Boolean match(String token){ // if match go to the next one
+        if (this.type.equals(token) || (this.token.equals(token))){
+            return true;
+        }
+        return false;
+    }
+
+    public void error(){
+        System.out.println("Error in line " + this.row + " column: " + this.column);
+    }
+    public void error(String info){
+        System.out.println("Error in line " + this.row + " column: " + this.column + " - " + info);
     }
 }
